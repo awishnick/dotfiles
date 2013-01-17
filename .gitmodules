@@ -61,3 +61,6 @@
 [submodule "_vim/bundle/vim-flake8"]
 	path = _vim/bundle/vim-flake8
 	url = https://github.com/nvie/vim-flake8.git
+[submodule "_vim/bundle/vim-python-pep8-indent"]
+	path = _vim/bundle/vim-python-pep8-indent
+	url = https://github.com/hynek/vim-python-pep8-indent.git
