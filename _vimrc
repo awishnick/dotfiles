@@ -2,8 +2,7 @@
 " ==========================================================
 " Dependencies - Libraries/Applications outside of vim
 " ==========================================================
-" Pep8 - http://pypi.python.org/pypi/pep8
-" Pyflakes
+" Flake8
 " Ack
 " Rake & Ruby for command-t
 " nose, django-nose
@@ -26,7 +25,7 @@
 " Snipmate
 "     Configurable snippets to avoid re-typing common comands
 "
-" PyFlakes
+" Flake8
 "     Underlines and displays errors with Python on-the-fly
 "
 " Fugitive
@@ -75,9 +74,6 @@ cmap W! w !sudo tee % >/dev/null
 
 " Toggle the tasklist
 map <leader>td <Plug>TaskList
-
-" Run pep8
-let g:pep8_map='<leader>8'
 
 " run py.test's
 nmap <silent><Leader>tf <Esc>:Pytest file<CR>
@@ -140,9 +136,7 @@ call pathogen#helptags()
 syntax on                     " syntax highlighing
 filetype on                   " try to detect filetypes
 filetype plugin indent on     " enable loading indent file for filetype
-set number                    " Display line numbers
 set numberwidth=1             " using only 1 column (and 1 space) while possible
-set background=dark           " We are using dark background in vim
 set title                     " show title in console title bar
 set wildmenu                  " Menu completion in command mode on <Tab>
 set wildmode=full             " <Tab> cycles between all matching choices.
@@ -156,7 +150,7 @@ set wildignore+=*.o,*.obj,.git,*.pyc
 set wildignore+=eggs/**
 set wildignore+=*.egg-info/**
 
-set grepprg=ack         " replace the default grep program with ack
+" set grepprg=ack         " replace the default grep program with ack
 
 
 " Set working directory
@@ -221,26 +215,14 @@ set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
 
 " displays tabs with :set list & displays when a line runs off-screen
 set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
-set list
+set nolist
 
 """ Searching and Patterns
-set ignorecase              " Default to using case insensitive searches,
+"set ignorecase              " Default to using case insensitive searches,
 set smartcase               " unless uppercase letters are used in the regex.
 set smarttab                " Handle tabs more intelligently 
 set hlsearch                " Highlight searches by default.
 set incsearch               " Incrementally search while typing a /regex
-
-"""" Display
-if has("gui_running")
-    colorscheme desert
-    " Remove menu bar
-    set guioptions-=m
-
-    " Remove toolbar
-    set guioptions-=T
-else
-    colorscheme torte
-endif
 
 " Paste from clipboard
 map <leader>p "+p
@@ -248,8 +230,9 @@ map <leader>p "+p
 " Quit window on <leader>q
 nnoremap <leader>q :q<CR>
 
-" hide matches on <leader>space
-nnoremap <leader><space> :nohlsearch<cr>
+" hide matches
+nnoremap <silent> <Return> :nohlsearch<CR><Return>
+nnoremap <silent> <Esc> :nohlsearch<CR><Esc>
 
 " Remove trailing whitespace on <leader>S
 nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
@@ -281,10 +264,11 @@ au FileType python set omnifunc=pythoncomplete#Complete
 au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 au FileType coffee setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-" Don't let pyflakes use the quickfix window
-let g:pyflakes_use_quickfix = 0
 
-
+" Run flake8 
+autocmd BufWritePost *.py call Flake8()
+autocmd BufReadPost *.py call Flake8()
+autocmd InsertLeave *.py call Flake8()
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
@@ -303,6 +287,12 @@ endif
 " Load up virtualenv's vimrc if it exists
 if filereadable($VIRTUAL_ENV . '/.vimrc')
     source $VIRTUAL_ENV/.vimrc
-endif
+endif 
 
-set colorcolumn=79
+" Navigate tabs with ALT+Arrow
+nnoremap <silent><A-Right> :tabnext<CR>
+nnoremap <silent><A-Left> :tabprevious<CR>
+
+"set colorcolumn=79
+
+colors desert
