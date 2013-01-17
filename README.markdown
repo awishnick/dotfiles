@@ -47,8 +47,7 @@ Note that if there was not an original version, the installed links will not be 
 
 ### Vim
 * python
-  * pep8
-  * pyflakes
+  * Flake8
   * rope
 * ruby
   * rake
