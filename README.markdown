@@ -1,10 +1,10 @@
 ## Files
-* .vimrc
-  * directory of file type configurations and plugins
-* .vimrc
-  * my vim configuration
-* .screenrc
-  * my screen configuration
+#### .vimrc
+directory of file type configurations and plugins
+#### .vimrc
+my vim configuration
+#### .screenrc
+my screen configuration
 
 ## Instructions
 ### Creating source files
