@@ -270,6 +270,10 @@ autocmd BufWritePost *.py call Flake8()
 autocmd BufReadPost *.py call Flake8()
 " autocmd InsertLeave *.py call Flake8()
 
+" C/C++
+au FileType c,cpp setlocal noexpandtab
+au FileType c,cpp nnoremap <F7> g:ClangUpdateQuickFix()
+
 " Add the virtualenv's site-packages to vim path
 if has('python')
 py << EOF
@@ -296,3 +300,12 @@ nnoremap <silent><A-Left> :tabprevious<CR>
 "set colorcolumn=79
 
 colors desert
+
+let g:clang_auto_select = 1
+let g:clang_periodic_quickfix = 1
+let g:clang_auto_user_options = 'compile_commands.json, .clang_complete'
+let g:clang_use_library = 1
+let g:clang_library_path = '/Users/aaron/clang-libclang3.2/build/Release/lib'
+let g:clang_complete_macros = 1
+let g:clang_snippets = 1
+let g:clang_snippets_engine = 'clang_complete'
