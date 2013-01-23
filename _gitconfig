@@ -11,6 +11,9 @@
 [push]
     default = matching
 
+[pull]
+    rebase = true
+
 [core]
     editor = vim
     pager = less -R
@@ -26,5 +29,6 @@
     up = !sh -c 'git pull --rebase --prune && git log --pretty=format:\"%Cred%ae %Creset- %C(yellow)%s %Creset(%ar)\" HEAD@{1}..'
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-    ls = ls-files
-
+    ls = log --pretty=format:"%w(76,0,8)%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Creset" --decorate
+    ll = log --pretty=format:"%w(76,0,4)%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]%Creset" --decorate --numstat
+    le = log --oneline --decorate
