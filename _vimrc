@@ -3,7 +3,6 @@
 " Dependencies - Libraries/Applications outside of vim
 " ==========================================================
 " Flake8
-" Ack
 " nose, django-nose
 
 " ==========================================================
@@ -108,9 +107,6 @@ imap <C-W> <C-O><C-W>
 " Open NerdTree
 map <leader>n :NERDTreeToggle<CR>
 
-" Ack searching
-nmap <leader>a <Esc>:Ack!
-
 " Load the Gundo window
 map <leader>g :GundoToggle<CR>
 
@@ -146,9 +142,6 @@ set vb t_vb=
 set wildignore+=*.o,*.obj,.git,*.pyc
 set wildignore+=eggs/**
 set wildignore+=*.egg-info/**
-
-" set grepprg=ack         " replace the default grep program with ack
-
 
 " Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
