@@ -4,7 +4,6 @@
 " ==========================================================
 " Flake8
 " Ack
-" Rake & Ruby for command-t
 " nose, django-nose
 
 " ==========================================================
@@ -109,8 +108,6 @@ imap <C-W> <C-O><C-W>
 " Open NerdTree
 map <leader>n :NERDTreeToggle<CR>
 
-" Run command-t file search
-map <leader>f :CommandT<CR>
 " Ack searching
 nmap <leader>a <Esc>:Ack!
 
@@ -262,7 +259,6 @@ autocmd FileType html,xhtml,xml,css setlocal expandtab shiftwidth=2 tabstop=2 so
 "au BufRead *.py compiler nose
 au FileType python set omnifunc=pythoncomplete#Complete
 au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 cinwords=if,elif,else,for,while,try,except,finally,def,class,with textwidth=79 wrap
-au FileType coffee setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 " Run flake8 
@@ -300,12 +296,3 @@ nnoremap <silent><A-Left> :tabprevious<CR>
 "set colorcolumn=79
 
 colors desert
-
-let g:clang_auto_select = 1
-let g:clang_periodic_quickfix = 1
-let g:clang_auto_user_options = 'compile_commands.json, .clang_complete'
-let g:clang_use_library = 1
-let g:clang_library_path = '/Users/aaron/clang-libclang3.2/build/Release/lib'
-let g:clang_complete_macros = 1
-let g:clang_snippets = 1
-let g:clang_snippets_engine = 'clang_complete'
