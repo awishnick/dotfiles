@@ -21,7 +21,7 @@ function unlink_file {
 }
 
 if [ "$1" = "vim" ]; then
-    for i in _vim*
+    for i in vimfiles*
     do
        link_file $i
     done
@@ -30,12 +30,14 @@ elif [ "$1" = "restore" ]; then
     do
         unlink_file $i
     done
+    unlink_file vimfiles
     exit
 else
     for i in _*
     do
         link_file $i
     done
+    link_file vimfiles
 fi
 
 git submodule update --init --recursive
