@@ -289,3 +289,4 @@ nnoremap <silent><A-Left> :tabprevious<CR>
 "set colorcolumn=79
 
 colors desert
+set guifont=Consolas:h10:cANSI
