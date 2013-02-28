@@ -290,3 +290,5 @@ nnoremap <silent><A-Left> :tabprevious<CR>
 
 colors desert
 set guifont=Consolas:h10:cANSI
+
+let g:pydoc_cmd = 'python -m pydoc'
