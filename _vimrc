@@ -59,13 +59,14 @@ fu! SplitScroll()
     :wincmd v
     :wincmd w
     execute "normal! \<C-d>"
-    :set scrollbind
     :wincmd w
-    :set scrollbind
 endfu
 
 nmap <leader>sb :call SplitScroll()<CR>
 
+" Navigate tabs with ALT+Arrow
+nnoremap <silent><A-Right> :tabnext<CR>
+nnoremap <silent><A-Left> :tabprevious<CR>
 
 "<CR><C-w>l<C-f>:set scrollbind<CR>
 
@@ -84,7 +85,7 @@ nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
 nmap <silent><Leader>te <Esc>:Pytest error<CR>
 
 " Run django tests
-map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
+au FileType python map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
 
 " Reload Vimrc
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -118,10 +119,10 @@ nmap <leader>a <Esc>:Ack!
 map <leader>g :GundoToggle<CR>
 
 " Jump to the definition of whatever the cursor is on
-map <leader>j :RopeGotoDefinition<CR>
+au FileType python map <leader>j :RopeGotoDefinition<CR>
 
 " Rename whatever the cursor is on (including references to it)
-map <leader>r :RopeRename<CR>
+au FileType python map <leader>r :RopeRename<CR>
 " ==========================================================
 " Pathogen - Allows us to organize our vim plugins
 " ==========================================================
@@ -191,7 +192,7 @@ set foldlevel=99            " don't fold by default
 inoremap # #
 
 " close preview window automatically when we move around
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+"autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 """" Reading/Writing
@@ -218,7 +219,7 @@ set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
 set nolist
 
 """ Searching and Patterns
-"set ignorecase              " Default to using case insensitive searches,
+set ignorecase              " Default to using case insensitive searches,
 set smartcase               " unless uppercase letters are used in the regex.
 set smarttab                " Handle tabs more intelligently 
 set hlsearch                " Highlight searches by default.
@@ -271,8 +272,17 @@ autocmd BufReadPost *.py call Flake8()
 " autocmd InsertLeave *.py call Flake8()
 
 " C/C++
-au FileType c,cpp setlocal noexpandtab
-au FileType c,cpp nnoremap <F7> g:ClangUpdateQuickFix()
+au FileType c,cpp setlocal noexpandtab ts=4 sw=4
+au FileType c,cpp nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+au FileType c,cpp nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>
+au FileType c,cpp map <C-F> :pyf ~/.vim/clang-format.py<CR>
+au FileType c,cpp imap <C-F> <ESC>:pyf ~/.vim/clang-format.py<CR>i
+let g:ycm_extra_conf_globlist = ['/Users/aaron/iZotope_master/*']
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:syntastic_always_populate_loc_list = 1
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
@@ -293,19 +303,17 @@ if filereadable($VIRTUAL_ENV . '/.vimrc')
     source $VIRTUAL_ENV/.vimrc
 endif 
 
-" Navigate tabs with ALT+Arrow
-nnoremap <silent><A-Right> :tabnext<CR>
-nnoremap <silent><A-Left> :tabprevious<CR>
-
 "set colorcolumn=79
 
 colors desert
+set guifont=Source\ Code\ Pro:h12
 
-let g:clang_auto_select = 1
-let g:clang_periodic_quickfix = 1
-let g:clang_auto_user_options = 'compile_commands.json, .clang_complete'
-let g:clang_use_library = 1
-let g:clang_library_path = '/Users/aaron/clang-libclang3.2/build/Release/lib'
-let g:clang_complete_macros = 1
-let g:clang_snippets = 1
-let g:clang_snippets_engine = 'clang_complete'
+" Stop using the arrow keys
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>

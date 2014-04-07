@@ -67,3 +67,9 @@
 [submodule "_vim/bundle/clang_complete"]
 	path = _vim/bundle/clang_complete
 	url = https://github.com/Rip-Rip/clang_complete
+[submodule "_vim/bundle/local_vimrc"]
+	path = _vim/bundle/local_vimrc
+	url = https://github.com/vim-scripts/local_vimrc.vim.git
+[submodule "_vim/bundle/xcodebuild"]
+	path = _vim/bundle/xcodebuild
+	url = https://github.com/jerrymarino/xcodebuild.vim.git
