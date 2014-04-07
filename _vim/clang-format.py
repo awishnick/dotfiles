@@ -25,8 +25,7 @@ import vim
 import os
 
 # Change this to the full path if clang-format is not on the path.
-my_path = os.path.dirname(os.path.realpath(__file__))
-binary = os.path.join(my_path, 'clang-format')
+binary = 'clang-format'
 
 # Change this to format according to other formatting styles. See the output of
 # 'clang-format --help' for a list of supported styles. The default looks for
