@@ -50,7 +50,7 @@
 " Shortcuts
 " ==========================================================
 set nocompatible              " Don't be compatible with vi
-let mapleader=","             " change the leader to be a comma vs slash
+"let mapleader=","             " change the leader to be a comma vs slash
 
 " Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
@@ -110,6 +110,12 @@ imap <C-W> <C-O><C-W>
 " Open NerdTree
 map <leader>n :NERDTreeToggle<CR>
 
+let g:CommandTMaxHeight = 30
+let g:CommandTMaxFiles = 500000
+let g:CommandTFileScanner = 'watchman'
+let g:CommandTInputDebounce = 200
+let g:CommandTMaxCachedDirectories = 10
+
 " Run command-t file search
 map <leader>f :CommandT<CR>
 " Ack searching
@@ -150,6 +156,7 @@ set vb t_vb=
 set wildignore+=*.o,*.obj,.git,*.pyc
 set wildignore+=eggs/**
 set wildignore+=*.egg-info/**
+set wildignore+=*.dia,*.d,*.LinkFileList,*.hmap,*.a,*.dat,*.ent,*.dtd
 
 " set grepprg=ack         " replace the default grep program with ack
 
@@ -277,7 +284,8 @@ au FileType c,cpp nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 au FileType c,cpp nnoremap <leader>j :YcmCompleter GoToDefinitionElseDeclaration<CR>
 au FileType c,cpp map <C-F> :pyf ~/.vim/clang-format.py<CR>
 au FileType c,cpp imap <C-F> <ESC>:pyf ~/.vim/clang-format.py<CR>i
-let g:ycm_extra_conf_globlist = ['/Users/aaron/iZotope_master/*']
+au FileType c,cpp command! -nargs=+ FindAll execute 'silent grep! -R --include="*.cpp" --include="*.c" --include="*.h" <args> .' | copen 33
+let g:ycm_extra_conf_globlist = ['/Users/aaron/iZotope_master/*', '~/code/*']
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_completion = 0
