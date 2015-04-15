@@ -39,8 +39,13 @@ else
 fi
 
 git submodule update --init --recursive
-git submodule foreach --recursive git pull origin master
 
 # setup command-t
 cd _vim/bundle/command-t
 rake make
+
+# set up YouCompleteMe
+cd -
+git submodule update --init --recursive
+cd _vim/bundle/YouCompleteMe
+./install.sh --clang-completer
