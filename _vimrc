@@ -115,6 +115,7 @@ let g:CommandTMaxFiles = 500000
 let g:CommandTFileScanner = 'watchman'
 let g:CommandTInputDebounce = 200
 let g:CommandTMaxCachedDirectories = 10
+let g:CommandTTraverseSCM='pwd'
 
 " Run command-t file search
 map <leader>f :CommandT<CR>
